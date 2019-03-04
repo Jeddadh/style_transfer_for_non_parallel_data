@@ -87,7 +87,7 @@ for i in range(N_ITER):
     LD1 =  torch.mean(- torch.log(discriminator1(H_p[0])) - torch.log(1 - discriminator1(transfered_H_p[1])))
     LD2 =  torch.mean(- torch.log(discriminator2(H_p[1])) - torch.log(1 - discriminator2(transfered_H_p[0])))
 
-    (Lrec - lamda*(LD1)+LD2).backward(retain_graph=True)
+    (Lrec - lamda*(LD1+LD2)).backward(retain_graph=True)
     optim_encoder.step()
     optim_generator.step()
     LD1.backward(retain_graph=True)
